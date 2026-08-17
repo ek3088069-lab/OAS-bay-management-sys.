@@ -50,14 +50,14 @@ app.use(session({
    cookie:{
      httpOnly: true,
      secure : false, // Set to true if using HTTPS
-      maxAge: 1000 * 60 * 60* 2// 1 day
+      maxAge: 1000 * 60 * 60* 24// 1 day
    }
 }));
 app.use(flash());
 
 //making a loggedin username and role available to all pug templates
 app.use((req,res,next)=>{
-  res.locals.session = req.session.userId ?{username:req.session.username, role: req.session.userRole}:null;
+  res.locals.user = req.session.userId ?{fullname:req.session.username, role: req.session.userRole}:null;
   res.locals.messages = req.flash();
   next();
 })

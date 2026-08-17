@@ -10,7 +10,7 @@ const InventorySchema = new mongoose.Schema({
     Quantity: {
         type: Number
     },
-    'Unit Price (UGX)': {
+    UnitPrice: {
         type: Number
     },
     Supplier: {

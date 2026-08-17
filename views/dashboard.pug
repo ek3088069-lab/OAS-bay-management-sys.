@@ -24,16 +24,16 @@ html(lang='en')
         h2 Quick Stats
         .stats-grid.row.g-3
           .stat-box.col-md-3.col-sm-6
-            .stat-number#serviceRecords 148
+            .stat-number#serviceRecords 0
             .stat-label Service Records
           .stat-box#customersBox.col-md-3.col-sm-6
-            .stat-number#totalCustomers 45
+            .stat-number#totalCustomers 0
             .stat-label Total Customers
           .stat-box#techniciansAvailable.col-md-3.col-sm-6
-            .stat-number#totalTechnicians 12
+            .stat-number#totalTechnicians 0
             .stat-label Technicians Available
           .stat-box#inventoryBox.col-md-3.col-sm-6
-            .stat-number#inventoryItems 156
+            .stat-number#inventoryItems 0
             .stat-label Inventory Items
 
       // Main Dashboard Grid
@@ -120,7 +120,7 @@ html(lang='en')
         h2 Quick Actions
         .action-buttons
           button.action-btn#generateReportBtn(onclick="alert('Generate report')") 📊 Generate Report
-          a.action-btn(href='/inventory/add-inventory') View Stock
+          a.action-btn(href='/inventory/add-inventory')  add Stock
           a.action-btn.danger.small-btn(href='/logout') Logout
 
     script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')

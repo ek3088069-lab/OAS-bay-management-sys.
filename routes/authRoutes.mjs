@@ -4,14 +4,14 @@ import {getRegisterForm, getLoginForm, registerUser, loginUser, logoutUser} from
 
 const router = express.Router();
 
-router.get('/signup', (req, res) => {
-  res.redirect('/?signup=true');
-});
+// router.get('/signup', (req, res) => {
+//   res.redirect('/?signup=true');
+// });
+router.get('/signup',getRegisterForm) 
+
 router.post('/signup', registerUser);
 
-router.get('/login', (req, res) => {
-  res.redirect('/?login=true');
-});
+router.get('/login', getLoginForm);
 router.post('/login', loginUser);
 router.get('/logout', logoutUser);
  
