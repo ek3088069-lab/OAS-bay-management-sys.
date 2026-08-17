@@ -1,0 +1,48 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title Register Stock
+  link(rel='stylesheet', href='style.css')
+  link
+h1 Register New Stock
+form(action='/inventory/add-inventory', method='POST')
+  label ItemName
+  br
+  input(type='text' name='ItemName' required='')
+  br
+  br
+  label Category
+  br
+  select(name='Category')
+    option(value='Engine Oil') Engine Oil
+    option(value='Gear Oil') Gear Oil
+    option(value='Brake Fluid') Brake Fluid
+    option(value='Oil Filter') Oil Filter
+    option(value='Brake Pads') Brake Pads
+    option(value='Tyres') Tyres
+    option(value='Grease') Grease
+  br
+  br
+  label Quantity
+  br
+  input(type='number' name='Quantity' min='1' required='')
+  br
+  br
+  label Unit Price (UGX)
+  br
+  input(type='number' name='Unit Price (UGX)' required='')
+  br
+  br
+  label Supplier
+  br
+  input(type='text' name='Supplier')
+  br
+  br
+  label DateReceived
+  br
+  input(type='date' name='DateReceived')
+  br
+  br
+  button(type='submit') Save Stock
+p
+  a(href='index.pug') Back to Home

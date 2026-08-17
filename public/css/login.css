@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #f5f5f5;
+    background: linear-gradient(
+            rgba(15, 24, 37, 0.65),
+            rgba(15, 24, 37, 0.65)
+        ),
+        url("../../public/images/oyerabackground.png") no-repeat center center fixed;
+    background-size: cover;
+}
+
+.login-box {
+    width: min(420px, calc(100% - 32px));
+    margin: 6vh auto;
+    padding: 32px 28px;
+    background: rgba(6, 24, 47, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.35);
+}
+
+.login-box h2 {
+    margin: 0 0 24px;
+    font-size: 1.95rem;
+    letter-spacing: 0.05em;
+    text-align: center;
+    color: #fff;
+}
+
+.login-box label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    color: #d8e2ff;
+}
+
+.login-box input,
+.login-box select,
+.login-box button {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 12px 14px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.login-box input,
+.login-box select {
+    background: rgba(255, 255, 255, 0.08);
+    color: #f8fbff;
+    margin-bottom: 18px;
+}
+
+.login-box input:focus,
+.login-box select:focus {
+    border-color: #72b8ff;
+    box-shadow: 0 0 0 4px rgba(114, 184, 255, 0.18);
+}
+
+.login-box button {
+    margin-top: 12px;
+    background: linear-gradient(135deg, #3b82f6, #0f172a);
+    color: #ffffff;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.login-box button:hover {
+    transform: translateY(-1px);
+    background: linear-gradient(135deg, #60a5fa, #1e293b);
+}
+
+@media (max-width: 500px) {
+    .login-box {
+        padding: 26px 20px;
+    }
+}

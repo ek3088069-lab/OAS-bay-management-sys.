@@ -1,0 +1,26 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Register user
+  link(rel='stylesheet' href='../../public/css/login.css')
+.login-box
+  h2 user registration
+  form#signupForm(action='/signup' method='POST')
+    br
+    label(for='username') Username
+    input#username(type='text' name='username' required='')
+    br
+    label(for='password') Password
+    input#password(type='password' name='password' required='')
+    br
+    label(for='identifier') Email or phone Number
+    input#identifier(type='text' name='identifier' required='')
+    label(for='role') Select Role
+    select#role(name='role' required='')
+      option(value='technician') Technician
+      option(value='senior') Senior Technician
+      option(value='admin') Admin
+    br
+    button(type='submit') Sign Up
+script(src='../../public/js/script.js')

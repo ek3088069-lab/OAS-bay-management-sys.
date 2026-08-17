@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Register Stock</title>
+    <link rel="stylesheet" href="../../public/css/registerstock.css" />
+  </head>
+
+  <body>
+    <h1>Register New Stock</h1>
+
+    <form>
+      <label>Item Name</label><br />
+      <input type="text" required /><br /><br />
+
+      <label>Category</label><br />
+
+      <select>
+        <option>Engine Oil</option>
+        <option>Gear Oil</option>
+        <option>Brake Fluid</option>
+        <option>Oil Filter</option>
+        <option>Brake Pads</option>
+        <option>Tyres</option>
+        <option>Grease</option>
+      </select>
+
+      <br /><br />
+
+      <label>Quantity</label><br />
+      <input type="number" min="1" required /><br /><br />
+
+      <label>Unit Price (UGX)</label><br />
+      <input type="number" required /><br /><br />
+
+      <label>Supplier</label><br />
+      <input type="text" /><br /><br />
+
+      <label>Date Received</label><br />
+      <input type="date" /><br /><br />
+
+      <button type="submit">Save Stock</button>
+    </form>
+
+    <p>
+      <a href="index.html">Back to Home</a>
+    </p>
+  </body>
+</html>

@@ -1,20 +1,31 @@
 {
-  "name": "helloworld",
+  "name": "oyera auto service bay",
   "version": "1.0.0",
-  "description": "this is my hello world project",
+  "description": "this is my Oyera Auto Service bay project",
   "keywords": [
-    "hello",
-    "world"
+    "oas",
+    "bay"
   ],
   "license": "ISC",
   "author": "Esther Kirabo",
-  "type": "commonjs",
-  "main": "index.js",
+  "type": "module",
+  "main": "index.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.mjs",
+    "dev": "nodemon index.mjs"
   },
   "dependencies": {
-    "express": "^5.2.1"
+    "bcryptjs": "^3.0.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^6.0.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mongoose": "^9.8.0",
+    "pug": "^3.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }

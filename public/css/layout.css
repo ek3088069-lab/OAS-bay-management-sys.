@@ -1,0 +1,45 @@
+ body
+     {
+        background-image: url('/images/oyerabackground.png');
+        background-size: cover;
+        background-attachment: fixed;
+      }
+      .login-modal .modal-content {
+        border-radius: 16px;
+        overflow: hidden;
+      }
+      .login-modal .modal-header {
+        background: #1f2937;
+        color: white;
+      }
+      .login-modal .modal-body {
+        padding: 1.5rem;
+        background: rgba(255,255,255,0.96);
+      }
+      .login-modal .modal-title {
+        font-weight: 600;
+      }
+      .login-modal .form-control,
+      .login-modal .form-select {
+        border-radius: 10px;
+        border: 1px solid #ced4da;
+        padding: 0.7rem 0.9rem;
+        background: #fff;
+      }
+      .login-modal .btn-primary {
+        background: #0d6efd;
+        border: none;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+      }
+      .login-modal .btn-primary:hover {
+        background: #0b5ed7;
+      }
+      .login-modal label {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #2c2c2c;
+      }
+      .login-modal .mb-3 {
+        margin-bottom: 1rem !important;
+      }

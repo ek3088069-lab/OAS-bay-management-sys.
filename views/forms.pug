@@ -1,0 +1,24 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Registration Form
+form.register-form(action='/signup' method='post')
+  h2 Create Account
+  label(for='surname')  Surname
+  input#surname(type='text' name='surname' placeholder='Enter your  surname' required='')
+  label(for='othername')  othername
+  input#othername(type='text' name='othername' placeholder='Enter your othername' required='')
+  label(for='email') Email Address
+  input#email(type='email' name='email' placeholder='Enter your email' required='')
+  label(for='password') Password
+  input#password(type='password' name='password' placeholder='Create a password' required='')
+  label(for='confirm-password') Confirm Password
+  input#confirm-password(type='password' name='confirm-password' placeholder='Confirm your password' required='')
+  label(for='phone') Phone Number
+  input#phone(type='text' name='phone' placeholder='Enter your phone number')
+  label(for='dob') Date of Birth
+  input#dob(type='date' name='dob')
+  br
+  br
+  button(type='submit') Register

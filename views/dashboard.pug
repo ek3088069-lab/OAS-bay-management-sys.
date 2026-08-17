@@ -1,0 +1,127 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Dashboard - Oyera Auto Service Bay
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css')
+    link(rel='stylesheet' href='/css/oyera.css')
+    link(rel='stylesheet' href='/css/dashboard.css')
+  body
+    .container-fluid.py-4
+      .header.rounded-4.shadow-sm
+        div
+          h1 🚗 Dashboard
+          p.text-light.opacity-75.mb-0 Oyera Auto Service Bay Management System
+        .user-info
+          p
+            strong#userName(data-user-name=session.username || 'User') Welcome #{session.username || 'User'}
+          p#userRole(data-user-role=session.role || 'Technician') Logged in as: #{session.role || 'Technician'}
+          button.logout-btn(onclick='logout()') Logout
+
+      // Stats Section
+      .stats-section#statsSection
+        h2 Quick Stats
+        .stats-grid.row.g-3
+          .stat-box.col-md-3.col-sm-6
+            .stat-number#serviceRecords 148
+            .stat-label Service Records
+          .stat-box#customersBox.col-md-3.col-sm-6
+            .stat-number#totalCustomers 45
+            .stat-label Total Customers
+          .stat-box#techniciansAvailable.col-md-3.col-sm-6
+            .stat-number#totalTechnicians 12
+            .stat-label Technicians Available
+          .stat-box#inventoryBox.col-md-3.col-sm-6
+            .stat-number#inventoryItems 156
+            .stat-label Inventory Items
+
+      // Main Dashboard Grid
+      .dashboard-grid#dashboardGrid.row.g-4
+        // Customers Card
+        .card#customersCard.col-lg-3.col-md-4.col-sm-6
+          .card-icon 👥
+          h3 Customers
+          p Manage customer information and records
+          a(href='/customers') View Customers
+
+        // Vehicles Card
+        .card#vehiclesCard.col-lg-3.col-md-4.col-sm-6
+          .card-icon 🚙
+          h3 Vehicles
+          p Manage vehicle information and service history
+          a(href='/vehicles') View Vehicles
+
+        // Services Card
+        .card#servicesCard.col-lg-3.col-md-4.col-sm-6
+          .card-icon 🔧
+          h3 Services
+          p View and manage service records
+          a(href='/services') View Services
+
+        // Service Registration Card
+        .card#serviceRegCard.col-lg-3.col-md-4.col-sm-6
+          .card-icon 📋
+          h3 Register Service
+          p Register new service requests
+          a(href='/inventory/add-inventory') Register Service
+
+        // Quick Service Entry Card
+        .card#quickServiceCard.col-lg-3.col-md-4.col-sm-6
+          .card-icon ⚡
+          h3 Quick Entry
+          p Quickly enter a new service entry
+          a(href='/quick-service') Quick Entry
+
+        // Technicians Card
+        .card#techniciansCard.col-lg-3.col-md-4.col-sm-6
+          .card-icon 👨‍🔧
+          h3 Technicians
+          p Manage technician assignments and skills
+          a(href='/technicians') View Technicians
+
+        // Inventory Card
+        .card#inventoryCard.col-lg-3.col-md-4.col-sm-6
+          .card-icon 📦
+          h3 Inventory
+          p Manage spare parts and inventory
+          a(href='/inventory/add-inventory') View Inventory
+
+        // Payments Card
+        .card#paymentsCard.col-lg-3.col-md-4.col-sm-6
+          .card-icon 💰
+          h3 Payments
+          p View and manage payments
+          a(href='/payments') View Payments
+
+        // Reports Card
+        .card#reportsCard.col-lg-3.col-md-4.col-sm-6
+          .card-icon 📊
+          h3 Reports
+          p Generate and view system reports
+          a(href='/reports') View Reports
+
+        // Settings Card
+        .card#settingsCard.col-lg-3.col-md-4.col-sm-6
+          .card-icon ⚙️
+          h3 Settings
+          p Manage system settings and configuration
+          a(href='/settings') Go to Settings
+
+        // Activity Log Card
+        .card#activityLogCard.col-lg-3.col-md-4.col-sm-6
+          .card-icon 📜
+          h3 Activity Log
+          p See login, logout, and recent system actions
+          a(href='/activity') View Activity
+
+      // Quick Actions Section
+      .quick-actions
+        h2 Quick Actions
+        .action-buttons
+          button.action-btn#generateReportBtn(onclick="alert('Generate report')") 📊 Generate Report
+          a.action-btn(href='/inventory/add-inventory') View Stock
+          a.action-btn.danger.small-btn(href='/logout') Logout
+
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
+    script(src='/js/dashboard.js')
