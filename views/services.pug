@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  .container.py-5
+    .d-flex.flex-wrap.justify-content-between.align-items-center.gap-3.mb-4
+      div
+        h1.mb-1 Services
+        p.text-muted.mb-0 Available Oyera Auto Service Bay services
+      a.btn.btn-outline-dark(href='/dashboard') Back to Dashboard
+
+    .row.g-4
+      each service in services
+        .col-md-6.col-lg-4
+          .card.h-100.shadow-sm.border-0
+            .card-body
+              .fs-2.mb-3= service.icon
+              h2.h5.card-title= service.name
+              p.card-text.text-muted= service.description
+              p.mb-0.fw-semibold= service.price

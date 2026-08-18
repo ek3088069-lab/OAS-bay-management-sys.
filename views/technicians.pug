@@ -35,15 +35,21 @@ html(lang='en')
         h2.mb-4 Technicians
         p.mb-4 Logged in as: #{role}
 
-        table.table.table-striped.table-hover
-          thead
-            tr
-              th Username
-              th Role
-          tbody
-            each technician in technicians
-              tr
-                td= technician.username
-                td= technician.role
+        if technicians && technicians.length
+          .table-responsive
+            table.table.table-striped.table-hover
+              thead
+                tr
+                  th Technician
+                  th Role
+                  th Contact
+              tbody
+                each technician in technicians
+                  tr
+                    td= technician.fullname
+                    td= technician.role
+                    td= technician.email || technician.phone || 'Not provided'
+        else
+          .alert.alert-info.mb-0 No technicians have been registered yet.
 
         a.btn.btn-primary.btn-back(href='/dashboard') Back to Dashboard

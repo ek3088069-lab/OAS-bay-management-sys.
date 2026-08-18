@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  .container.py-5
+    .d-flex.flex-wrap.justify-content-between.align-items-center.gap-3.mb-4
+      div
+        h1.mb-1 Inventory
+        p.text-muted.mb-0 #{items.length} item#{items.length === 1 ? '' : 's'} currently recorded
+      .d-flex.gap-2
+        a.btn.btn-outline-dark(href='/dashboard') Back to Dashboard
+        a.btn.btn-primary(href='/inventory/add-inventory') Add Inventory Item
+
+    if lowStockItems.length
+      .alert.alert-warning
+        strong Low stock: 
+        | #{lowStockItems.map((item) => item.ItemName).join(', ')}.
+
+    .card.shadow-sm.border-0
+      .card-body.p-0
+        if items.length
+          .table-responsive
+            table.table.table-hover.align-middle.mb-0
+              thead.table-light
+                tr
+                  th Item
+                  th Category
+                  th Quantity
+                  th Unit price (UGX)
+                  th Supplier
+                  th Date received
+              tbody
+                each item in items
+                  tr
+                    td.fw-semibold= item.ItemName
+                    td= item.Category || '—'
+                    td
+                      span(class=Number(item.Quantity || 0) <= 5 ? 'badge text-bg-warning' : 'badge text-bg-success')= item.Quantity || 0
+                    td= item.UnitPrice ? Number(item.UnitPrice).toLocaleString() : '—'
+                    td= item.Supplier || '—'
+                    td= item.DateReceived ? new Date(item.DateReceived).toLocaleDateString() : '—'
+        else
+          .p-4.text-center.text-muted
+            p.mb-3 No inventory items have been added yet.
+            a.btn.btn-primary(href='/inventory/add-inventory') Add the first item

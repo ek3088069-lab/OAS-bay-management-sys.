@@ -12,6 +12,7 @@ export const getLoginForm = (req, res) => {
 
 export const registerUser = async (req, res) => {
   try {
+    console.log("SIGNUP DATA:", req.body);
     const { fullname, password, identifier, role } = req.body;
     const isEmail = identifier.includes("@");
     const userData = {
@@ -26,7 +27,9 @@ export const registerUser = async (req, res) => {
       userData.phone = identifier;
     }
     const newUser = new User(userData);
+    console.log("ABOUT TO SAVE USER");
     await newUser.save();
+    console.log("USER SAVED SUCCESSFULLY");
     res.redirect("/login");
   } catch (error) {
     res.status(400).send(`Registration failed:${error.message}`);
@@ -45,18 +48,10 @@ export const loginUser = async (req, res) => {
     const query =isEmail?{email:identifier}:{phone:identifier};
 
     const user = await User.findOne( query );
-  
-    // if (!user) {
-    //   return res.status(401).send("Invalid credentials");
-    
-    // }
 
-    // const selectedRole = role.toLowerCase();
-    // const userRole = String(user.role).toLowerCase();
-
-    // if (selectedRole !== userRole) {
-    //   return res.status(401).send("Selected role does not match this account");
-    // }
+    if (!user) {
+  return res.status(401).send("Invalid credentials");
+}
 
     if (await bcrypt.compare(password, user.password)) {
       req.session.userId = user._id;

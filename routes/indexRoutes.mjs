@@ -100,7 +100,10 @@ router.get('/dashboard', requireAuth, (req, res) => {
 
 router.get('/technicians', requireAuth, requireRole(['Admin', 'Senior technician']), async (req, res) => {
   try {
-    const technicians = await User.find({}, 'username role').sort({ username: 1 });
+    const technicians = await User.find(
+      { role: { $in: [/technician/i] } },
+      'fullname role email phone'
+    ).sort({ fullname: 1 });
     const role = normalizeRoleName(req.session.userRole || 'Technician');
 
     res.render('technicians', {
@@ -112,6 +115,20 @@ router.get('/technicians', requireAuth, requireRole(['Admin', 'Senior technician
     console.error('Error loading technicians:', error);
     res.status(500).send('Error loading technician list');
   }
+});
+
+router.get('/services', requireAuth, (req, res) => {
+  const role = normalizeRoleName(req.session.userRole || 'Technician');
+  const services = [
+    { name: 'Engine Oil & Filter Change', description: 'Replace engine oil and the oil filter.', price: 'UGX 79,000–200,000', icon: '🛢️' },
+    { name: 'Gearbox Oil & Filter Change', description: 'Service automatic or manual gearbox oil and filters.', price: 'Price on inspection', icon: '⚙️' },
+    { name: 'Brake Service', description: 'Brake fluid service and brake pad replacement.', price: 'Brake fluid: UGX 13,000–20,000', icon: '🛑' },
+    { name: 'Wheel Alignment', description: 'Correct wheel angles for safer handling and tyre life.', price: 'UGX 30,000', icon: '🛞' },
+    { name: 'Wheel Balancing', description: 'Balance wheels to reduce vibration while driving.', price: 'UGX 20,000', icon: '⚖️' },
+    { name: 'Greasing & Minor Repairs', description: 'Lubrication and small mechanical repairs.', price: 'Labor from UGX 20,000', icon: '🔧' },
+  ];
+
+  res.render('services', { session: req.session, role, services });
 });
 
 router.get('/activity', requireAuth, requireRole(['Admin']), async (req, res) => {

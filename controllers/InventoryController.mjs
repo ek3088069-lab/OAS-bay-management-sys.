@@ -1,6 +1,22 @@
 import Inventory from '../models/Inventory.mjs';
 import ActivityLog from '../models/ActivityLog.mjs';
 
+export const getInventoryList = async (req, res) => {
+    try {
+        const items = await Inventory.find({}).sort({ Category: 1, ItemName: 1 }).lean();
+        const lowStockItems = items.filter((item) => Number(item.Quantity || 0) <= 5);
+
+        res.render('inventory', {
+            session: req.session,
+            items,
+            lowStockItems,
+        });
+    } catch (error) {
+        console.error('Error loading inventory:', error);
+        res.status(500).send('Error loading inventory.');
+    }
+};
+
 export const getInventoryPage = (req, res) => {
     res.render('addinventory');
 };
