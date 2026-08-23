@@ -18,73 +18,16 @@ html(lang="en")
         if user
           p Welcome #{user.fullname}
     nav
-      a(href='/') Home 
-      if user 
-        a(href='#') Records 
-        a(href='#') View Stock
-        if user && (user.role === "Senior Technician" || user.role === "Admin")
-          a(href='/dashboard') Dashboard
-          a(href='/inventory/add-inventory') Inventory
-          a(href='/stock/register') Register Stock
-          a(href='/customers/register') Customers
-          a(href='/vehicles/register') Vehicles
+      if user
+        a(href='/dashboard') Dashboard
+        a(href='/inventory/add-inventory') Add Inventory Item
         a(href='/logout') Logout (#{user.fullname})
       else
+        a(href='/') Home
         a(href='/login' ) Login
         a(href='/signup' ) Signup
     main
       block content
-
-    //- if !session
-    //-   .modal.fade.login-modal#loginModal(tabindex='-1' aria-labelledby='loginModalLabel' aria-hidden='true')
-    //-     .modal-dialog.modal-dialog-centered
-    //-       .modal-content
-    //-         .modal-header
-    //-           h5.modal-title#loginModalLabel System Login
-    //-           button.btn-close.btn-close-white(type='button' data-bs-dismiss='modal' aria-label='Close')
-    //-         .modal-body
-    //-           form#loginForm(action='/login' method='POST')
-    //-             .mb-3
-    //-               label.form-label(for='username') Username
-    //-               input#username.form-control(type='text' name='username' required='')
-    //-             .mb-3
-    //-               label.form-label(for='password') Password
-    //-               input#password.form-control(type='password' name='password' required='')
-    //-             .mb-3
-    //-               label.form-label(for='loginRole') Select Role
-    //-               select#loginRole.form-select(name='role' required='')
-    //-                 option(value='') Select your role
-    //-                 option(value='admin') Admin
-    //-                 option(value='senior') Senior Technician
-    //-                 option(value='technician') Technician
-    //-             .d-grid
-    //-               button.btn.btn-primary(type='submit') Login
-
-    //-   .modal.fade.login-modal#signupModal(tabindex='-1' aria-labelledby='signupModalLabel' aria-hidden='true')
-    //-     .modal-dialog.modal-dialog-centered
-    //-       .modal-content
-    //-         .modal-header
-    //-           h5.modal-title#signupModalLabel User Registration
-    //-           button.btn-close.btn-close-white(type='button' data-bs-dismiss='modal' aria-label='Close')
-    //-         .modal-body
-    //-           form#signupForm(action='/signup' method='POST')
-    //-             .mb-3
-    //-               label.form-label(for='signupUsername') Username
-    //-               input#signupUsername.form-control(type='text' name='username' required='')
-    //-             .mb-3
-    //-               label.form-label(for='signupPassword') Password
-    //-               input#signupPassword.form-control(type='password' name='password' required='')
-    //-             .mb-3
-    //-               label.form-label(for='identifier') Email or phone number
-    //-               input#identifier.form-control(type='text' name='identifier' required='')
-    //-             .mb-3
-    //-               label.form-label(for='role') Select Role
-    //-               select#role.form-select(name='role' required='')
-    //-                 option(value='technician') Technician
-    //-                 option(value='senior') Senior Technician
-    //-                 option(value='admin') Admin
-    //-             .d-grid
-                  button.btn.btn-primary(type='submit') Sign Up
 
     footer
       p © Oyera  Auto Service

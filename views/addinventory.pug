@@ -1,48 +1,54 @@
 doctype html
-head
-  meta(charset='UTF-8')
-  title Register Stock
-  link(rel='stylesheet', href='style.css')
-  link
-h1 Register New Stock
-form(action='/inventory/add-inventory', method='POST')
-  label ItemName
-  br
-  input(type='text' name='ItemName' required='')
-  br
-  br
-  label Category
-  br
-  select(name='Category')
-    option(value='Engine Oil') Engine Oil
-    option(value='Gear Oil') Gear Oil
-    option(value='Brake Fluid') Brake Fluid
-    option(value='Oil Filter') Oil Filter
-    option(value='Brake Pads') Brake Pads
-    option(value='Tyres') Tyres
-    option(value='Grease') Grease
-  br
-  br
-  label Quantity
-  br
-  input(type='number' name='Quantity' min='1' required='')
-  br
-  br
-  label Unit Price (UGX)
-  br
-  input(type='number' name='UnitPrice' required='')
-  br
-  br
-  label Supplier
-  br
-  input(type='text' name='Supplier')
-  br
-  br
-  label DateReceived
-  br
-  input(type='date' name='DateReceived')
-  br
-  br
-  button(type='submit') Save Stock
-p
-  a(href='index.pug') Back to Home
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Register Stock - Oyera Auto Service Bay
+    link(rel='stylesheet' href='/css/oyera.css')
+    link(rel='stylesheet' href='/css/addinventory.css')
+
+  body.inventory-page
+    main.inventory-content
+      .inventory-form-card
+        h1 Register New Stock
+        p.form-intro Add spare parts, fluids, and other service stock to the inventory.
+
+        form(action='/inventory/add-inventory' method='POST')
+          .form-field
+            label(for='itemName') Item Name
+            input#itemName(type='text' name='ItemName' required)
+
+          .form-field
+            label(for='category') Category
+            select#category(name='Category' required)
+              option(value='' selected disabled) Select a category
+              option(value='Engine Oil') Engine Oil
+              option(value='Gear Oil') Gear Oil
+              option(value='Brake Fluid') Brake Fluid
+              option(value='Oil Filter') Oil Filter
+              option(value='Brake Pads') Brake Pads
+              option(value='Tyres') Tyres
+              option(value='Grease') Grease
+
+          .form-row
+            .form-field
+              label(for='quantity') Quantity
+              input#quantity(type='number' name='Quantity' min='1' required)
+            .form-field
+              label(for='unitPrice') Unit Price (UGX)
+              input#unitPrice(type='number' name='UnitPrice' min='0' required)
+
+          .form-field
+            label(for='supplier') Supplier
+            input#supplier(type='text' name='Supplier')
+
+          .form-field
+            label(for='dateReceived') Date Received
+            input#dateReceived(type='date' name='DateReceived')
+
+          button(type='submit') Save Stock
+
+        a.back-link(href='/inventory') ← Back to Inventory
+
+    footer
+      p © Oyera Auto Service

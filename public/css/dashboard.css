@@ -12,6 +12,17 @@ body {
     color: #ffffff;
 }
 
+.page-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.welcome-message {
+    margin-left: auto;
+    text-align: right;
+}
+
 .container {
     max-width: 1400px;
     margin: 0 auto;

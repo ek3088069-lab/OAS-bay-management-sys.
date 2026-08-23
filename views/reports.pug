@@ -1,0 +1,102 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Reports | Oyera Auto Service Bay
+    link(rel='stylesheet' href='/css/reports.css')
+  body
+    main.reports-page
+      header.reports-header
+        div
+          p.eyebrow Oyera Auto Service Bay
+          h1 Revenue reports
+          p Reports use paid service records as collected revenue.
+        a.back-link(href='/dashboard') ← Back to dashboard
+
+      section.metrics(aria-label='Revenue summary')
+        article.metric-card
+          span.metric-label Collected revenue
+          strong UGX #{collectedRevenue.toLocaleString()}
+          small Paid service records
+        article.metric-card
+          span.metric-label Total billed
+          strong UGX #{totalBilled.toLocaleString()}
+          small All recorded services
+        article.metric-card
+          span.metric-label Outstanding
+          strong UGX #{outstandingRevenue.toLocaleString()}
+          small Unpaid service records
+        article.metric-card
+          span.metric-label Services recorded
+          strong= totalServices
+          small All-time total
+
+      section.report-panel
+        .panel-heading
+          div
+            h2 Revenue over the last 7 days
+            p Daily collected revenue in Uganda shillings.
+        - const maxValue = Math.max(...chart.values, 1)
+        - const points = chart.values.map((value, index) => `${40 + (index * 600 / 6)},${220 - (value / maxValue * 170)}`).join(' ')
+        svg.revenue-chart(viewBox='0 0 680 280' role='img' aria-label='Line chart of revenue over the last seven days')
+          line(x1='40' y1='220' x2='640' y2='220' class='axis')
+          line(x1='40' y1='50' x2='40' y2='220' class='axis')
+          each label, index in chart.labels
+            - const x = 40 + (index * 600 / 6)
+            text(x=x y='250' text-anchor='middle' class='chart-label')= label
+          polyline(points=points class='revenue-line')
+          each value, index in chart.values
+            - const x = 40 + (index * 600 / 6)
+            - const y = 220 - (value / maxValue * 170)
+            circle(cx=x cy=y r='5' class='chart-point')
+            title= `${chart.labels[index]}: UGX ${value.toLocaleString()}`
+        .chart-note Peak daily revenue: UGX #{Math.max(...chart.values).toLocaleString()}
+
+      .report-grid
+        section.report-panel
+          .panel-heading
+            div
+              h2 Revenue by service category
+              p Collected revenue and number of services.
+          if categorySummary.length
+            .table-wrap
+              table
+                thead
+                  tr
+                    th Category
+                    th Services
+                    th Collected revenue
+                tbody
+                  each item in categorySummary
+                    tr
+                      td= item.category
+                      td= item.jobs
+                      td UGX #{item.revenue.toLocaleString()}
+          else
+            p.empty-state No service records have been added yet.
+
+        section.report-panel
+          .panel-heading
+            div
+              h2 Recent service records
+              p Latest services added to the system.
+          if recentRecords.length
+            .table-wrap
+              table
+                thead
+                  tr
+                    th Vehicle
+                    th Service
+                    th Amount
+                    th Status
+                tbody
+                  each record in recentRecords
+                    tr
+                      td= record.numberPlate
+                      td= record.serviceName
+                      td UGX #{Number(record.totalServiceCost).toLocaleString()}
+                      td
+                        span.status(class=record.isPaid ? 'paid' : 'unpaid')= record.isPaid ? 'Paid' : 'Unpaid'
+          else
+            p.empty-state No service records have been added yet.

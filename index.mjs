@@ -45,7 +45,7 @@ app.use(session({
   saveUninitialized:false,
   store: MongoStore.create({ 
     mongoUrl: process.env.DATABASE, 
-    collectionname: 'sessions',
+    collectionName: 'sessions',
   }),
    cookie:{
      httpOnly: true,

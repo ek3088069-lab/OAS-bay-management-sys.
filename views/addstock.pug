@@ -6,7 +6,7 @@ block content
             .col-md-4
                 .card.p-4.shadow-sm
                     h4.mb-3.fw-bold Register Stock
-                    form(action="/stock", method="POST")
+                    form(action="/registerStock/stock", method="POST")
                     
                         //- Item Name Dropdown (Error-Minimizing Select input)
                         .mb-3
@@ -54,7 +54,7 @@ block content
 
                         .mb-3
                             label.form-label Price (UGX)
-                            input.form-control(type="number", name="price", placeholder="e.g., 85000", required)
+                            input.form-control(type="number", name="unitprice", placeholder="e.g., 85000", required)
                         
                         .mb-3
                             label.form-label Quantity Received

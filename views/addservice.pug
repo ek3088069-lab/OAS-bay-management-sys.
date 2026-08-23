@@ -1,0 +1,77 @@
+extends layout
+
+block head
+  link(rel='stylesheet' href='/css/services.css')
+
+block content
+  .service-form-page
+    .service-form-card
+      .service-form-heading
+        p.services-eyebrow Service records
+        h1 Add service record
+        p Record the customer, vehicle, service, and technician who administered it.
+
+      if messages && messages.success && messages.success.length
+        .service-message.success= messages.success[0]
+      if messages && messages.error && messages.error.length
+        .service-message.error= messages.error[0]
+
+      form.service-record-form(action='/services/register' method='POST')
+        .form-field
+          label(for='customerName') Customer name
+          input#customerName(type='text' name='customerName' required placeholder='Enter customer name' autocomplete='name')
+        .form-field
+          label(for='numberPlate') Car number plate
+          input#numberPlate(type='text' name='numberPlate' required placeholder='e.g. UBA 123A' style='text-transform: uppercase')
+        .form-field
+          label(for='serviceCategory')  Category
+          select#serviceCategory(name='serviceCategory' required)
+            option(value='') Select a category
+            each category in [...new Set(services.map((service) => service.category))]
+              option(value=category)= category
+        .form-field
+          label(for='serviceName') Service administered
+          select#serviceName(name='serviceName' required)
+            option(value='') Select a service
+            each service in services
+              option(value=service.name data-category=service.category)= service.name
+        .form-field
+          label(for='serviceDate') Date of service
+          input#serviceDate(type='date' name='serviceDate' required value=today)
+        .form-field
+          label(for='technicianName') Technician who administered the service
+          select#technicianName(name='technicianName' required)
+            option(value='') Select a technician
+            if session.username
+              option(value=session.username selected)= `${session.username} (currently logged in)`
+            each technician in technicians
+              if technician.fullname !== session.username
+                option(value=technician.fullname)= `${technician.fullname} - ${technician.role}`
+        .form-field
+          label(for='stockUsed') Stock used
+          select#stockUsed(name='stockUsed')
+            option(value='') No stock item used
+            each item in inventoryItems
+              option(value=item.ItemName)= `${item.ItemName} (${item.Quantity || 0} available)`
+        .form-field
+          label(for='totalServiceCost') Total service cost (UGX)
+          input#totalServiceCost(type='number' name='totalServiceCost' required min='20,000' step='10000' placeholder='e.g. 50000')
+        .form-field.form-checkbox
+          label(for='isPaid') Payment status
+          label.checkbox-label
+            input#isPaid(type='checkbox' name='isPaid')
+            span Paid in full
+        .service-form-actions
+          a.services-back(href='/services') Cancel
+          button(type='submit') Save service record
+
+block scripts
+  script.
+    const categorySelect = document.querySelector('#serviceCategory');
+    const serviceSelect = document.querySelector('#serviceName');
+    categorySelect.addEventListener('change', () => {
+      for (const option of serviceSelect.options) {
+        option.hidden = Boolean(categorySelect.value) && option.dataset.category !== categorySelect.value;
+      }
+      serviceSelect.value = '';
+    });

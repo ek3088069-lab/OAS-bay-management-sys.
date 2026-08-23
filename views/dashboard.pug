@@ -32,35 +32,6 @@ html(lang='en')
 
     .dashboard-layout
 
-
-      // ================= SIDEBAR =================
-
-      aside.sidebar
-
-        nav
-
-          a.active(href='/dashboard')
-            | 📈 Dashboard
-
-          a(href='/services')
-            | 🔧 Services
-
-          a(href='/technicians')
-            | 👨‍🔧 Technicians
-
-          a(href='/inventory')
-            | 📦 Inventory
-
-          a(href='/reports')
-            | 📊 Reports
-
-          a(href='/settings')
-            | ⚙️ Settings
-
-          a(href='/activity')
-            | 📜 Activity Log
-
-
       // ================= MAIN CONTENT =================
 
       main.main-content
@@ -78,6 +49,29 @@ html(lang='en')
             | 👋 Welcome back,
             strong#welcomeUser= session.username || 'User'
             | !
+
+
+      // ================= SIDEBAR =================
+
+      aside.sidebar
+
+        nav
+
+          a(href='/services')
+            | 🔧 Services
+
+          a(href='/technicians')
+            | 👨‍🔧 Technicians
+
+          a(href='/inventory')
+            | 📦 Inventory
+
+          if permissions.showReports
+            a(href='/reports')
+              | 📊 Reports
+
+          a(href='/activity')
+            | 📜 Activity Log
 
 
         // ================= STATISTICS =================
@@ -105,7 +99,7 @@ html(lang='en')
 
               div
                 .stat-label Available technicians
-                .stat-number#activeJobs 0
+                .stat-number#activeJobs= activeTechnicians
 
 
         // ================= NEW SERVICE ENTRY =================
@@ -114,36 +108,9 @@ html(lang='en')
 
           h2 New Service Entry
 
-          form#serviceForm
-
-            // Service
-
-            select(
-              id='service'
-              name='service'
-            )
-              option(value='') Select a service
-              option(value='engine-oil') Engine Oil &amp; Filter
-              option(value='brake') Brake Service
-              option(value='gearbox') Gearbox Oil &amp; Filter
-              option(value='alignment') Wheel Alignment
-              option(value='balancing') Wheel Balancing
-              option(value='greasing') Greasing
-
-
-            // Technician
-
-            input(
-              type='text'
-              id='technician'
-              name='technician'
-              placeholder='Assigned Technician'
-            )
-
-
-            // Submit
-
-            button(type='submit') Register Job
+          form#serviceForm(action='/services/register' method='GET')
+            p Add a complete record with the customer, vehicle, service date, and technician.
+            button(type='submit') Add service record
 
 
         // ================= DASHBOARD CARDS =================
@@ -202,9 +169,6 @@ html(lang='en')
 
             a.action-btn(href='/inventory/add-inventory')
               | 📦 Add Stock
-
-            a.action-btn(href='/reports')
-              | 📊 Generate Report
 
             a.action-btn.danger(href='/logout')
               | Logout

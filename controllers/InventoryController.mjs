@@ -1,5 +1,6 @@
 import Inventory from '../models/Inventory.mjs';
 import ActivityLog from '../models/ActivityLog.mjs';
+import Stock from '../models/stock.mjs';
 
 export const getInventoryList = async (req, res) => {
     try {
@@ -41,3 +42,20 @@ export const addInventoryItem = async (req, res) => {
         res.status(500).send('Failed to add inventory item.');
     }
 };
+export const getAddStockForm =(req,res)=>{
+    res.render('addstock');
+}
+
+export const addStock = async (req, res) => {
+    try {
+        const newStock =new Stock({
+         ...req.body,
+         registeredBy: req.session.userId,
+        });
+        await newStock.save();
+        res.redirect ('/inventory/addStock');           
+        } catch (error) {
+        console.error(error);
+        res.status(500).send( 'error adding stock');
+    }
+    };

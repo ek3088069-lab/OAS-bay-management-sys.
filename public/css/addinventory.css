@@ -1,0 +1,127 @@
+body.inventory-page {
+  min-height: 100vh;
+  margin: 0;
+  color: #f5f5f5;
+  background:
+    linear-gradient(rgba(10, 20, 34, 0.78), rgba(10, 20, 34, 0.78)),
+    url('/images/oyerabackground.png') center / cover fixed;
+}
+
+.inventory-content {
+  width: min(100% - 32px, 720px);
+  margin: 0 auto;
+  padding: 56px 0 32px;
+}
+
+.inventory-form-card {
+  padding: 36px;
+  background: rgba(17, 24, 39, 0.92);
+  border: 1px solid rgba(244, 180, 0, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.35);
+}
+
+.inventory-form-card h1 {
+  margin: 0;
+  color: #f4b400;
+  font-size: clamp(1.8rem, 4vw, 2.3rem);
+}
+
+.form-intro {
+  margin: 8px 0 28px;
+  color: #d7dde7;
+}
+
+.form-field {
+  margin-bottom: 18px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.inventory-form-card label {
+  display: block;
+  margin-bottom: 7px;
+  color: #f7d77b;
+  font-weight: 600;
+}
+
+.inventory-form-card input,
+.inventory-form-card select {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  color: #f8fafc;
+  font: inherit;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 8px;
+}
+
+.inventory-form-card select option {
+  color: #111827;
+}
+
+.inventory-form-card input:focus,
+.inventory-form-card select:focus {
+  outline: none;
+  border-color: #f4b400;
+  box-shadow: 0 0 0 3px rgba(244, 180, 0, 0.2);
+}
+
+.inventory-form-card button {
+  width: 100%;
+  margin-top: 6px;
+  padding: 13px 18px;
+  color: #1b1b1b;
+  font: inherit;
+  font-weight: 700;
+  background: #f4b400;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.inventory-form-card button:hover {
+  background: #ffd15a;
+  transform: translateY(-1px);
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 22px;
+  color: #f7d77b;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+body.inventory-page footer {
+  padding: 0 16px 28px;
+  color: #d7dde7;
+  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .inventory-content {
+    width: min(100% - 24px, 720px);
+    padding-top: 28px;
+  }
+
+  .inventory-form-card {
+    padding: 24px 20px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

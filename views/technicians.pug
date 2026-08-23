@@ -29,10 +29,14 @@ html(lang='en')
       .btn-back {
         margin-top: 1rem;
       }
+      .page-title {
+        color: #f4b400;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
+      }
   body
     .container.py-5
       .panel
-        h2.mb-4 Technicians
+        h1.page-title.mb-4 Technicians
         p.mb-4 Logged in as: #{role}
 
         if technicians && technicians.length

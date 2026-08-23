@@ -51,8 +51,13 @@ body {
 .login-box input,
 .login-box select {
     background: rgba(255, 255, 255, 0.08);
-    /* color: #f8fbff; */
+    color: #f8fbff;
     margin-bottom: 18px;
+}
+
+.login-box select option {
+    color: #f8fbff;
+    background: #06182f;
 }
 
 .login-box input:focus,
@@ -75,6 +80,31 @@ body {
 .login-box button:hover {
     transform: translateY(-1px);
     background: linear-gradient(135deg, #60a5fa, #1e293b);
+}
+
+.back-link {
+    display: block;
+    margin-top: 20px;
+    color: #ffffff;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.45);
+}
+
+.back-link:hover,
+.back-link:focus-visible {
+    color: #8fd3ff;
+    text-decoration: underline;
+}
+
+.back-link .link-action {
+    color: #8fd3ff;
+    font-weight: 800;
+}
+
+.back-link .link-action::before {
+    content: " ";
 }
 
 @media (max-width: 500px) {

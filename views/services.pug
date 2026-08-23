@@ -1,19 +1,27 @@
 extends layout
 
-block content
-  .container.py-5
-    .d-flex.flex-wrap.justify-content-between.align-items-center.gap-3.mb-4
-      div
-        h1.mb-1 Services
-        p.text-muted.mb-0 Available Oyera Auto Service Bay services
-      a.btn.btn-outline-dark(href='/dashboard') Back to Dashboard
+block head
+  link(rel='stylesheet' href='/css/services.css')
 
-    .row.g-4
+block content
+  .services-page
+    .services-heading
+      div
+        p.services-eyebrow Oyera Auto Service Bay
+        h1 Service catalogue
+        p Choose one or more services for a vehicle. All prices are in Uganda shillings (UGX).
+      .services-actions
+        a.services-register(href='/services/register') Add service record
+        a.services-back(href='/dashboard') Back to dashboard
+
+    .services-list
       each service in services
-        .col-md-6.col-lg-4
-          .card.h-100.shadow-sm.border-0
-            .card-body
-              .fs-2.mb-3= service.icon
-              h2.h5.card-title= service.name
-              p.card-text.text-muted= service.description
-              p.mb-0.fw-semibold= service.price
+        article.service-item
+          .service-icon(aria-hidden='true')= service.icon
+          .service-details
+            p.service-category= service.category
+            h2= service.name
+            p.service-description= service.description
+          .service-price
+            span Price
+            strong= service.price

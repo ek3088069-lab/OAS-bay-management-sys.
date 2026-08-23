@@ -11,42 +11,33 @@ const normalizeRoleName = (role = '') => {
 // Role-based permissions
 const dashboardPermissions = {
   Admin: {
-    showCustomers: true,
-    showVehicles: true,
     showServices: true,
     showServiceRegistration: true,
     showTechnicians: true,
     showInventory: true,
     showPayments: true,
     showReports: true,
-    showSettings: true,
     showQuickServiceEntry: true,
     showActivityLog: true,
   },
   "Senior technician": {
-    showCustomers: true,
-    showVehicles: true,
     showServices: true,
     showServiceRegistration: true,
     showTechnicians: true,
     showInventory: true,
     showPayments: true,
     showReports: true,
-    showSettings: false,
     showQuickServiceEntry: true,
     showActivityLog: false,
   },
   Technician: {
-    showCustomers: false,
-    showVehicles: true,
     showServices: true,
-    showServiceRegistration: false,
+    showServiceRegistration: true,
     showTechnicians: false,
     showInventory: true,
     showPayments: false,
     showReports: false,
-    showSettings: false,
-    showQuickServiceEntry: false,
+    showQuickServiceEntry: true,
     showActivityLog: false,
   },
 };
@@ -63,19 +54,13 @@ function applyPermissions() {
   const userRole = normalizeRoleName(rawRole);
   const permissions = dashboardPermissions[userRole] || dashboardPermissions["Technician"];
 
-  document.getElementById("customersCard").classList.toggle("hidden", !permissions.showCustomers);
-  document.getElementById("vehiclesCard").classList.toggle("hidden", !permissions.showVehicles);
-  document.getElementById("servicesCard").classList.toggle("hidden", !permissions.showServices);
   document.getElementById("serviceRegCard").classList.toggle("hidden", !permissions.showServiceRegistration);
   document.getElementById("techniciansCard").classList.toggle("hidden", !permissions.showTechnicians);
   document.getElementById("inventoryCard").classList.toggle("hidden", !permissions.showInventory);
   document.getElementById("paymentsCard").classList.toggle("hidden", !permissions.showPayments);
   document.getElementById("reportsCard").classList.toggle("hidden", !permissions.showReports);
-  document.getElementById("settingsCard").classList.toggle("hidden", !permissions.showSettings);
   document.getElementById("quickServiceCard").classList.toggle("hidden", !permissions.showQuickServiceEntry);
   document.getElementById("activityLogCard").classList.toggle("hidden", !permissions.showActivityLog);
-
-  document.getElementById("customersBox").classList.toggle("hidden", !permissions.showCustomers);
   document.getElementById("techniciansAvailable").classList.toggle("hidden", !permissions.showTechnicians);
   document.getElementById("inventoryBox").classList.toggle("hidden", !permissions.showInventory);
 }
