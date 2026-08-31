@@ -1,163 +1,167 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard - Oyera Auto Service Bay</title>
-    <link rel="stylesheet" href="../../public/css/dashboard.css" />
-  </head>
-  <body>
-    <div class="container">
-      <div class="header">
-        <div>
-          <h1>🚗 Dashboard</h1>
-          <p style="color: #666; margin-top: 5px">
-            Oyera Auto Service Bay Management System
-          </p>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Oyera Auto Service Bay</title>
+  <link rel="stylesheet" href="../css/dashboard.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1>🚗 Dashboard</h1>
+        <p style="color: #666; margin-top: 5px">
+          Oyera Auto Service Bay Management System
+        </p>
+      </div>
+      <div class="user-info">
+        <p><strong id="userName">Welcome, User</strong></p>
+        <p id="userRole">Role: Technician</p>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+    <!-- Sidebar Navigation -->
+
+    <aside class="sidebar" id="sidebar">
+      <nav>
+        <a href="/services">🔧 Services</a>
+
+        ```
+        <a href="/technicians">👨‍🔧 Technicians</a>
+
+        <a href="/inventory">📦 Inventory</a>
+
+        <a href="/customers">👥 Customers</a>
+
+        <a href="/vehicles">🚙 Vehicles</a>
+
+        <a href="/payments">💰 Payments</a>
+
+        <a href="/reports">📊 Reports</a>
+
+        <a href="/activity">📜 Activity Log</a>
+        ```
+
+      </nav>
+    </aside>
+
+
+
+    <!-- Stats Section -->
+    <div class="stats-section" id="statsSection">
+      <h2>Quick Stats</h2>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-number" id="totalServices">0</div>
+          <div class="stat-label">Services Today</div>
         </div>
-        <div class="user-info">
-          <p><strong id="userName">Welcome, User</strong></p>
-          <p id="userRole">Role: Technician</p>
-          <button class="logout-btn" onclick="logout()">Logout</button>
+        <div class="stat-box" id="customersBox">
+          <div class="stat-number" id="totalCustomers">0</div>
+          <div class="stat-label">Total Customers</div>
+        </div>
+        <div class="stat-box" id="vehiclesBox">
+          <div class="stat-number" id="totalVehicles">0</div>
+          <div class="stat-label">Vehicles in System</div>
+        </div>
+        <div class="stat-box" id="inventoryBox">
+          <div class="stat-number" id="inventoryItems">0</div>
+          <div class="stat-label">Inventory Items</div>
         </div>
       </div>
+    </div>
 
-      <!-- Stats Section -->
-      <div class="stats-section" id="statsSection">
-        <h2>Quick Stats</h2>
-        <div class="stats-grid">
-          <div class="stat-box">
-            <div class="stat-number" id="totalServices">24</div>
-            <div class="stat-label">Services Today</div>
-          </div>
-          <div class="stat-box" id="customersBox">
-            <div class="stat-number" id="totalCustomers">45</div>
-            <div class="stat-label">Total Customers</div>
-          </div>
-          <div class="stat-box" id="vehiclesBox">
-            <div class="stat-number" id="totalVehicles">38</div>
-            <div class="stat-label">Vehicles in System</div>
-          </div>
-          <div class="stat-box" id="inventoryBox">
-            <div class="stat-number" id="inventoryItems">156</div>
-            <div class="stat-label">Inventory Items</div>
-          </div>
-        </div>
+    <!-- Main Dashboard Grid -->
+    <div class="dashboard-grid" id="dashboardGrid">
+      <!-- Customers Card -->
+      <div class="card" id="customersCard">
+        <div class="card-icon">👥</div>
+        <h3>Customers</h3>
+        <p>Manage customer information and records</p>
+        <a href="/customers">View Customers</a>
       </div>
 
-      <!-- Main Dashboard Grid -->
-      <div class="dashboard-grid" id="dashboardGrid">
-        <!-- Customers Card -->
-        <div class="card" id="customersCard">
-          <div class="card-icon">👥</div>
-          <h3>Customers</h3>
-          <p>Manage customer information and records</p>
-          <a href="/customers">View Customers</a>
-        </div>
+      <!-- Vehicles Card -->
+      <div class="card" id="vehiclesCard">
+        <div class="card-icon">🚙</div>
+        <h3>Vehicles</h3>
+        <p>Manage vehicle information and service history</p>
+        <a href="/vehicles">View Vehicles</a>
+      </div>
 
-        <!-- Vehicles Card -->
-        <div class="card" id="vehiclesCard">
-          <div class="card-icon">🚙</div>
-          <h3>Vehicles</h3>
-          <p>Manage vehicle information and service history</p>
-          <a href="/vehicles">View Vehicles</a>
-        </div>
+      <!-- Services Card -->
+      <div class="card" id="servicesCard">
+        <div class="card-icon">🔧</div>
+        <h3>Services</h3>
+        <p>View and manage service records</p>
+        <a href="/services">View Services</a>
+      </div>
 
-        <!-- Services Card -->
-        <div class="card" id="servicesCard">
-          <div class="card-icon">🔧</div>
-          <h3>Services</h3>
-          <p>View and manage service records</p>
-          <a href="/services">View Services</a>
-        </div>
+      <!-- Service Registration Card -->
+      <div class="card" id="serviceRegCard">
+        <div class="card-icon">📋</div>
+        <h3>Register Service</h3>
+        <p>Register new service requests</p>
+        <a href="/inventory/add-inventory">Register Service</a>
+      </div>
 
-        <!-- Service Registration Card -->
-        <div class="card" id="serviceRegCard">
-          <div class="card-icon">📋</div>
-          <h3>Register Service</h3>
-          <p>Register new service requests</p>
-          <a href="/inventory/add-inventory">Register Service</a>
-        </div>
+      <!-- Quick Service Entry Card -->
+      <div class="card" id="quickServiceCard">
+        <div class="card-icon">⚡</div>
+        <h3>Quick Entry</h3>
+        <p>Quickly enter a new service entry</p>
+        <a href="/quick-service">Quick Entry</a>
+      </div>
 
-        <!-- Quick Service Entry Card -->
-        <div class="card" id="quickServiceCard">
-          <div class="card-icon">⚡</div>
-          <h3>Quick Entry</h3>
-          <p>Quickly enter a new service entry</p>
-          <a href="/quick-service">Quick Entry</a>
-        </div>
+      <!-- Technicians Card -->
+      <div class="card" id="techniciansCard">
+        <div class="card-icon">👨‍🔧</div>
+        <h3>Technicians</h3>
+        <p>Manage technician assignments and skills</p>
+        <a href="/technicians">View Technicians</a>
+      </div>
 
-        <!-- Technicians Card -->
-        <div class="card" id="techniciansCard">
-          <div class="card-icon">👨‍🔧</div>
-          <h3>Technicians</h3>
-          <p>Manage technician assignments and skills</p>
-          <a href="/technicians">View Technicians</a>
-        </div>
+      <!-- Inventory Card -->
+      <div class="card" id="inventoryCard">
+        <div class="card-icon">📦</div>
+        <h3>Inventory</h3>
+        <p>Manage spare parts and inventory</p>
+        <a href="/inventory/add-inventory">View Inventory</a>
+      </div>
 
-        <!-- Inventory Card -->
-        <div class="card" id="inventoryCard">
-          <div class="card-icon">📦</div>
-          <h3>Inventory</h3>
-          <p>Manage spare parts and inventory</p>
-          <a href="/inventory/add-inventory">View Inventory</a>
-        </div>
+      <!-- Payments Card -->
+      <div class="card" id="paymentsCard">
+        <div class="card-icon">💰</div>
+        <h3>Payments</h3>
+        <p>View and manage payments</p>
+        <a href="/payments">View Payments</a>
+      </div>
 
-        <!-- Payments Card -->
-        <div class="card" id="paymentsCard">
-          <div class="card-icon">💰</div>
-          <h3>Payments</h3>
-          <p>View and manage payments</p>
-          <a href="/payments">View Payments</a>
-        </div>
-
-        <!-- Reports Card -->
-        <div class="card" id="reportsCard">
-          <div class="card-icon">📊</div>
-          <h3>Reports</h3>
-          <p>Generate and view system reports</p>
-          <a href="/reports">View Reports</a>
-        </div>
-
-        <!-- Settings Card -->
-        <div class="card" id="settingsCard">
-          <div class="card-icon">⚙️</div>
-          <h3>Settings</h3>
-          <p>Manage system settings and configuration</p>
-          <a href="/settings">Go to Settings</a>
-        </div>
+      <!-- Reports Card -->
+      <div class="card" id="reportsCard">
+        <div class="card-icon">📊</div>
+        <h3>Reports</h3>
+        <p>Generate and view system reports</p>
+        <a href="/reports">View Reports</a>
       </div>
 
       <!-- Quick Actions Section -->
       <div class="quick-actions">
         <h2>Quick Actions</h2>
         <div class="action-buttons">
-          <button
-            class="action-btn"
-            id="addCustomerBtn"
-            onclick="alert('Navigate to add customer')"
-          >
+          <button class="action-btn" id="addCustomerBtn" onclick="alert('Navigate to add customer')">
             + Add Customer
           </button>
-          <button
-            class="action-btn"
-            id="addVehicleBtn"
-            onclick="alert('Navigate to add vehicle')"
-          >
+          <button class="action-btn" id="addVehicleBtn" onclick="alert('Navigate to add vehicle')">
             + Add Vehicle
           </button>
-          <button
-            class="action-btn"
-            id="newServiceBtn"
-            onclick="window.location.href = '/inventory/add-inventory'"
-          >
+          <button class="action-btn" id="newServiceBtn" onclick="window.location.href = '/inventory/add-inventory'">
             + New Service
           </button>
-          <button
-            class="action-btn"
-            id="generateReportBtn"
-            onclick="alert('Generate report')"
-          >
+          <button class="action-btn" id="generateReportBtn" onclick="alert('Generate report')">
             📊 Generate Report
           </button>
           <a href="/logout" class="action-btn danger">Logout</a>
@@ -165,6 +169,7 @@
       </div>
     </div>
 
-    <script src="../../public/js/dashboard.js"></script>
-  </body>
+    <script src="../js/dashboard.js"></script>
+</body>
+
 </html>
