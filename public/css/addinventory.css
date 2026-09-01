@@ -3,7 +3,7 @@ body.inventory-page {
   margin: 0;
   color: #f5f5f5;
   background:
-    linear-gradient(rgba(10, 20, 34, 0.78), rgba(10, 20, 34, 0.78)),
+    linear-gradient(rgba(10, 20, 34, 0.45), rgba(10, 20, 34, 0.45)),
     url('/images/oyerabackground.png') center / cover fixed;
 }
 

@@ -4,9 +4,17 @@
     box-sizing: border-box;
 }
 
+html {
+    background-image: url('/images/oyerabackground.png');
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: url('/images/oyerabackground.png') center center / cover no-repeat fixed;
+    background: rgba(0, 0, 0, 0.45);
     min-height: 100vh;
     padding: 20px;
     color: #ffffff;
@@ -20,7 +28,7 @@ body {
 
 .welcome-message {
     margin-left: auto;
-    text-align: right;
+    text-align: center;
 }
 
 .container {
@@ -223,6 +231,28 @@ body {
     font-size: 12px;
     min-width: 90px;
     margin-left: 18px;
+}
+
+/* Sidebar Navigation Styling */
+.sidebar nav {
+    background: rgba(60, 60, 60, 0.85);
+    border-bottom: 2px solid #f4b400;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.sidebar nav a {
+    color: #f0f0f0;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    transition: color 0.3s;
+    display: inline-block;
+}
+
+.sidebar nav a:hover {
+    color: #f4b400;
 }
 
 @media (max-width: 768px) {

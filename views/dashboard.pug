@@ -14,20 +14,6 @@ html(lang='en')
 
   body
 
-    // ================= TOP BAR =================
-
-    header.top-bar
-
-      // Logo
-       .logo
-      //   img(src='/images/oyera-logo.png' alt='Oyera Auto Service Bay')
-
-      // User
-      .user-info
-        span.user-icon 👤
-        span#userName= session.username || 'User'
-
-
     // ================= MAIN LAYOUT =================
 
     .dashboard-layout
@@ -39,15 +25,25 @@ html(lang='en')
 
         // Page Heading
 
-        .page-heading
+        .page-heading(style='display: block; background: rgba(18, 20, 25, 0.60); border: 1px solid rgba(255, 255, 255, 0.12); padding: 25px; border-radius: 10px; margin-bottom: 30px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);')
 
-          div
-            h1 OAS Bay Dashboard
-            p Records &amp; Service Management Overview
+          .heading-top(style='display: flex; justify-content: space-between; align-items: flex-start; gap: 30px; margin-bottom: 20px;')
+            .heading-logo-title(style='display: flex; align-items: center; gap: 20px; flex: 1;')
+              img(src='/images/oyeralogo.png' alt='Oyera Auto Service Bay' style='height: 50px; width: auto; flex-shrink: 0;')
+              div(style='color: white;')
+                h1(style='margin: 0; color: #f4b400; font-size: 28px;')= role + ' Dashboard'
+                p(style='margin: 8px 0 0 0; color: #e0e0e0; font-size: 14px;') Records &amp; Service Management Overview
+            
+            .heading-user-info(style='text-align: right; color: white;')
+              div(style='display: flex; align-items: center; gap: 12px; justify-content: flex-end; margin-bottom: 10px;')
+                span.user-icon(style='font-size: 28px;') 
+                div
+                  span#userName(style='font-weight: 700; display: block; color: #f4b400; font-size: 16px;')= session.username || 'User'
+                  p(style='margin: 5px 0 0 0; color: #e0e0e0; font-size: 13px;') Logged in as: #{role}
 
-          .welcome-message
-            | 👋 Welcome back,
-            strong#welcomeUser= session.username || 'User'
+          .welcome-message(style='color: white; font-size: 16px;')
+            | Welcome back, 
+            strong#welcomeUser(style='color: #f4b400;')= session.username || 'User'
             | !
 
 
@@ -57,21 +53,25 @@ html(lang='en')
 
         nav
 
-          a(href='/services')
-            | 🔧 Services
+          if permissions.showServices
+            a(href='/services')
+              | 🔧 Services
 
-          a(href='/technicians')
-            | 👨‍🔧 Technicians
+          if permissions.showTechnicians
+            a(href='/technicians')
+              | 👨‍🔧 Technicians
 
-          a(href='/inventory')
-            | 📦 Inventory
+          if permissions.showInventory
+            a(href='/inventory')
+              | 📦 Inventory
 
           if permissions.showReports
             a(href='/reports')
               | 📊 Reports
 
-          a(href='/activity')
-            | 📜 Activity Log
+          if permissions.showActivityLog
+            a(href='/activity')
+              | 📜 Activity Log
 
 
         // ================= STATISTICS =================
@@ -118,42 +118,42 @@ html(lang='en')
         section.dashboard-grid
 
           // Services
+          if permissions.showServices
+            .card
 
-          .card
+              .card-icon 🔧
 
-            .card-icon 🔧
+              h3 Services
 
-            h3 Services
+              p View and manage service records.
 
-            p View and manage service records.
-
-            a(href='/services') View Services
+              a(href='/services') View Services
 
 
           // Technicians
+          if permissions.showTechnicians
+            .card
 
-          .card
+              .card-icon 👨‍🔧
 
-            .card-icon 👨‍🔧
+              h3 Technicians
 
-            h3 Technicians
+              p Manage technician assignments and skills.
 
-            p Manage technician assignments and skills.
-
-            a(href='/technicians') View Technicians
+              a(href='/technicians') View Technicians
 
 
           // Inventory
+          if permissions.showInventory
+            .card
 
-          .card
+              .card-icon 📦
 
-            .card-icon 📦
+              h3 Inventory
 
-            h3 Inventory
+              p Manage spare parts and stock.
 
-            p Manage spare parts and stock.
-
-            a(href='/inventory') View Inventory
+              a(href='/inventory') View Inventory
 
 
         // ================= QUICK ACTIONS =================
@@ -164,14 +164,16 @@ html(lang='en')
 
           .action-buttons
 
-            a.action-btn(href='/inventory')
-              | 📋 View Stock
+            if permissions.showInventory
+              a.action-btn(href='/inventory')
+                | 📋 View Stock
 
-            a.action-btn(href='/inventory/add-inventory')
-              | 📦 Add Stock
+              a.action-btn(href='/inventory/add-inventory')
+                | 📦 Add Stock
 
-            a.action-btn(href='/services/register')
-              |🔧 Add Service record
+            if permissions.showServiceRegistration
+              a.action-btn(href='/services/register')
+                |🔧 Add Service record
             a.action-btn.danger(href='/logout')
               | Logout
 

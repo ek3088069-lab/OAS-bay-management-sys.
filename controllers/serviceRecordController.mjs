@@ -4,14 +4,26 @@ import ServiceRecord from "../models/ServiceRecord.mjs";
 import ActivityLog from "../models/ActivityLog.mjs";
 
 const services = [
-  { category: "Lubricants & filters", name: "Engine oil and filter service" },
-  { category: "Lubricants & filters", name: "Gearbox oil and filter service" },
-  { category: "Brake service", name: "Brake fluid service" },
-  { category: "Brake service", name: "Brake pad replacement" },
-  { category: "Wheel care", name: "Wheel alignment" },
-  { category: "Wheel care", name: "Wheel balancing" },
-  { category: "General repairs", name: "Greasing and minor repairs" },
-  { category: "Parts sales", name: "Service and repair parts" },
+  {
+    category: "Lubricants & filters",
+    name: "Engine oil and filter service",
+    price: 50000,
+  },
+  {
+    category: "Lubricants & filters",
+    name: "Gearbox oil and filter service",
+    price: 75000,
+  },
+  { category: "Brake service", name: "Brake fluid service", price: 40000 },
+  { category: "Brake service", name: "Brake pad replacement", price: 100000 },
+  { category: "Wheel care", name: "Wheel alignment", price: 60000 },
+  { category: "Wheel care", name: "Wheel balancing", price: 45000 },
+  {
+    category: "General repairs",
+    name: "Greasing and minor repairs",
+    price: 35000,
+  },
+  { category: "Parts sales", name: "Service and repair parts", price: 0 },
 ];
 
 export const getServiceRecordForm = async (req, res) => {
@@ -19,8 +31,12 @@ export const getServiceRecordForm = async (req, res) => {
     const technicians = await User.find(
       { role: { $regex: "technician", $options: "i" } },
       "fullname role",
-    ).sort({ fullname: 1 }).lean();
-    const inventoryItems = await Inventory.find({}, "ItemName Quantity").sort({ ItemName: 1 }).lean();
+    )
+      .sort({ fullname: 1 })
+      .lean();
+    const inventoryItems = await Inventory.find({}, "ItemName Quantity")
+      .sort({ ItemName: 1 })
+      .lean();
 
     res.render("addservice", {
       services,
@@ -49,7 +65,16 @@ export const createServiceRecord = async (req, res) => {
     } = req.body;
     const cost = Number(totalServiceCost);
 
-    if (!customerName || !numberPlate || !serviceCategory || !serviceName || !serviceDate || !technicianName || !Number.isFinite(cost) || cost < 0) {
+    if (
+      !customerName ||
+      !numberPlate ||
+      !serviceCategory ||
+      !serviceName ||
+      !serviceDate ||
+      !technicianName ||
+      !Number.isFinite(cost) ||
+      cost < 0
+    ) {
       req.flash("error", "Please complete every service-record field.");
       return res.redirect("/services/register");
     }
@@ -75,7 +100,10 @@ export const createServiceRecord = async (req, res) => {
       details: `Registered ${serviceName} for ${numberPlate.toUpperCase()} (${customerName}); cost UGX ${cost.toLocaleString()}, ${req.body.isPaid === "on" ? "paid" : "unpaid"}.`,
     });
 
-    req.flash("success", `Service record for ${serviceRecord.numberPlate} was added successfully.`);
+    req.flash(
+      "success",
+      `Service record for ${serviceRecord.numberPlate} was added successfully.`,
+    );
     res.redirect("/services/register");
   } catch (error) {
     console.error("Error creating service record:", error);

@@ -11,7 +11,8 @@ block content
         h1 Service catalogue
         p Choose one or more services for a vehicle. All prices are in Uganda shillings (UGX).
       .services-actions
-        a.services-register(href='/services/register') Add service record
+        if permissions && permissions.showServiceRegistration
+          a.services-register(href='/services/register') Add service record
         a.services-back(href='/dashboard') Back to dashboard
 
     .services-list

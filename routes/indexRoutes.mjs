@@ -160,6 +160,8 @@ router.get(
 
 router.get("/services", requireAuth, (req, res) => {
   const role = normalizeRoleName(req.session.userRole || "Technician");
+  const permissions =
+    dashboardPermissions[role] || dashboardPermissions.Technician;
   const services = [
     {
       category: "Lubricants & filters",
@@ -221,7 +223,7 @@ router.get("/services", requireAuth, (req, res) => {
     },
   ];
 
-  res.render("services", { session: req.session, role, services });
+  res.render("services", { session: req.session, role, permissions, services });
 });
 
 router.get("/services/register", requireAuth, getServiceRecordForm);

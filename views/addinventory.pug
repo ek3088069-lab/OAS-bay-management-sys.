@@ -8,6 +8,10 @@ html(lang='en')
     link(rel='stylesheet' href='/css/addinventory.css')
 
   body.inventory-page
+    header(style='background: #f8f9fa; padding: 20px 0; border-bottom: 1px solid #dee2e6;')
+      .container(style='display: flex; align-items: center; gap: 20px;')
+        img(src='/images/oyeralogo.png' alt='Oyera Logo' style='height: 50px; width: auto;')
+        h1(style='margin: 0;') Oyera Auto Service Bay
     main.inventory-content
       .inventory-form-card
         h1 Register New Stock
@@ -36,7 +40,7 @@ html(lang='en')
               input#quantity(type='number' name='Quantity' min='1' required)
             .form-field
               label(for='unitPrice') Unit Price (UGX)
-              input#unitPrice(type='number' name='UnitPrice' min='10,000' required)
+              input#unitPrice(type='number' name='UnitPrice' min='5000' step='1000' required)
 
           .form-field
             label(for='supplier') Supplier

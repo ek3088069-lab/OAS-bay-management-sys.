@@ -1,3 +1,17 @@
+html {
+    background-image: url('/images/oyerabackground.png');
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+body {
+    background: rgba(245, 243, 239, 0.97);
+    margin: 0;
+    padding: 0;
+}
+
 .services-page {
     width: min(1000px, calc(100% - 32px));
     margin: 42px auto;
@@ -150,6 +164,154 @@
 .form-field select:focus {
     border-color: #17633a;
     outline: 3px solid rgba(23, 99, 58, 0.17);
+}
+
+/* Custom Multiselect Styles */
+.custom-multiselect {
+    position: relative;
+    width: 100%;
+}
+
+.multiselect-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: #ffffff;
+    border: 1px solid #bcc5d3;
+    border-radius: 8px;
+    cursor: pointer;
+    min-height: 46px;
+    transition: border-color 0.3s;
+}
+
+.multiselect-header:hover {
+    border-color: #17633a;
+}
+
+.multiselect-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    flex: 1;
+}
+
+.selected-tag {
+    background: #0d6eff;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.multiselect-arrow {
+    color: #172033;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 10px;
+    transition: transform 0.3s;
+}
+
+.multiselect-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #bcc5d3;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.multiselect-dropdown.active {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.multiselect-search {
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    background: #f9f9f9;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bcc5d3;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.search-input:focus {
+    border-color: #17633a;
+    outline: 3px solid rgba(23, 99, 58, 0.17);
+}
+
+.multiselect-options {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.multiselect-option {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.multiselect-option:hover {
+    background-color: #f5f8fc;
+}
+
+.option-checkbox {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    cursor: pointer;
+    accent-color: #0d6eff;
+}
+
+.option-checkbox:checked {
+    background-color: #0d6eff;
+}
+
+.checkbox-custom {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    border: 2px solid #bcc5d3;
+    border-radius: 4px;
+    background: #ffffff;
+    transition: all 0.2s;
+}
+
+.option-checkbox:checked ~ .option-label .checkbox-custom {
+    background: #0d6eff;
+    border-color: #0d6eff;
+}
+
+.option-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    flex: 1;
+    margin: 0;
+}
+
+.option-text {
+    color: #172033;
+    font-size: 14px;
 }
 
 .form-checkbox {

@@ -1,9 +1,36 @@
- body
-     {
-        background-image: url('/images/oyerabackground.png');
-        background-size: cover;
-        background-attachment: fixed;
-      }
+ html {
+     background-image: url('/images/oyerabackground.png');
+     background-attachment: fixed;
+     background-position: center;
+     background-size: cover;
+     background-repeat: no-repeat;
+ }
+
+ body {
+     background: rgba(243, 239, 231, 0.97);
+     margin: 0;
+     padding: 0;
+ }
+
+ nav {
+     background: rgba(60, 60, 60, 0.85);
+     padding: 15px;
+     text-align: center;
+     border-bottom: 2px solid #f4b400;
+ }
+
+ nav a {
+     color: #f0f0f0;
+     text-decoration: none;
+     margin: 0 20px;
+     font-weight: bold;
+     transition: color 0.3s;
+ }
+
+ nav a:hover {
+     color: #f4b400;
+ }
+
       .login-modal .modal-content {
         border-radius: 16px;
         overflow: hidden;

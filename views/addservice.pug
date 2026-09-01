@@ -31,10 +31,22 @@ block content
               option(value=category)= category
         .form-field
           label(for='serviceName') Service administered
-          select#serviceName(name='serviceName' required)
-            option(value='') Select a service
-            each service in services
-              option(value=service.name data-category=service.category)= service.name
+          .custom-multiselect
+            .multiselect-header#multiselectHeader
+              .multiselect-display#multiselectDisplay Tap to select services...
+              .multiselect-arrow ▼
+            .multiselect-dropdown#multiselectDropdown
+              .multiselect-search
+                input.search-input#searchInput(type='text' placeholder='Search services...')
+              .multiselect-options#multiselectOptions
+                each service in services
+                  .multiselect-option
+                    input.option-checkbox(type='checkbox' id=`service-${service.name}` value=service.name data-price=service.price data-category=service.category)
+                    label.option-label(for=`service-${service.name}`)
+                      span.checkbox-custom
+                      span.option-text= `${service.name} (UGX ${service.price.toLocaleString()})`
+          input#serviceName(type='hidden' name='serviceName' value='')
+          .selected-services#selectedServices
         .form-field
           label(for='serviceDate') Date of service
           input#serviceDate(type='date' name='serviceDate' required value=today)
@@ -54,8 +66,14 @@ block content
             each item in inventoryItems
               option(value=item.ItemName)= `${item.ItemName} (${item.Quantity || 0} available)`
         .form-field
+          label(for='serviceCost') Service cost (UGX)
+          input#serviceCost(type='number' name='serviceCost' value='0' min='0' step='1000' placeholder='Enter service cost')
+        .form-field
+          label(for='labourFee') Labour fee (UGX)
+          input#labourFee(type='number' name='labourFee' value='20000' min='20000' step='1000' placeholder='20,000' readonly)
+        .form-field
           label(for='totalServiceCost') Total service cost (UGX)
-          input#totalServiceCost(type='number' name='totalServiceCost' required min='20,000' step='10000' placeholder='20,000')
+          input#totalServiceCost(type='number' name='totalServiceCost' required min='20000' step='1000' placeholder='Auto-calculated' readonly)
         .form-field.form-checkbox
           label(for='isPaid') Payment status
           label.checkbox-label
@@ -68,10 +86,97 @@ block content
 block scripts
   script.
     const categorySelect = document.querySelector('#serviceCategory');
-    const serviceSelect = document.querySelector('#serviceName');
-    categorySelect.addEventListener('change', () => {
-      for (const option of serviceSelect.options) {
-        option.hidden = Boolean(categorySelect.value) && option.dataset.category !== categorySelect.value;
+    const multiselectHeader = document.querySelector('#multiselectHeader');
+    const multiselectDropdown = document.querySelector('#multiselectDropdown');
+    const multiselectDisplay = document.querySelector('#multiselectDisplay');
+    const searchInput = document.querySelector('#searchInput');
+    const checkboxes = document.querySelectorAll('.option-checkbox');
+    const hiddenInput = document.querySelector('input[name="serviceName"]');
+    const serviceCostInput = document.querySelector('#serviceCost');
+    const labourFeeInput = document.querySelector('#labourFee');
+    const totalServiceCostInput = document.querySelector('#totalServiceCost');
+    
+    // Toggle dropdown visibility
+    multiselectHeader.addEventListener('click', () => {
+      multiselectDropdown.classList.toggle('active');
+      searchInput.focus();
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.custom-multiselect')) {
+        multiselectDropdown.classList.remove('active');
       }
-      serviceSelect.value = '';
+    });
+    
+    // Search functionality
+    searchInput.addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+      const options = document.querySelectorAll('.multiselect-option');
+      options.forEach(option => {
+        const label = option.querySelector('.option-text').textContent.toLowerCase();
+        option.style.display = label.includes(searchTerm) ? 'flex' : 'none';
+      });
+    });
+    
+    // Handle checkbox changes
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', () => {
+        updateDisplay();
+        calculateTotal();
+      });
+    });
+    
+    // Update display of selected items
+    const updateDisplay = () => {
+      const selected = Array.from(checkboxes)
+        .filter(cb => cb.checked)
+        .map(cb => cb.value);
+      
+      hiddenInput.value = selected.join(',');
+      
+      if (selected.length === 0) {
+        multiselectDisplay.textContent = 'Tap to select services...';
+      } else {
+        multiselectDisplay.innerHTML = selected.map((name, i) => 
+          `<span class="selected-tag">${name}</span>`
+        ).join('');
+      }
+    };
+    
+    // Filter by category
+    categorySelect.addEventListener('change', () => {
+      const category = categorySelect.value;
+      checkboxes.forEach(checkbox => {
+        const isMatch = !category || checkbox.dataset.category === category;
+        checkbox.closest('.multiselect-option').style.display = isMatch ? 'flex' : 'none';
+      });
+    });
+    
+    // Auto-calculate total service cost
+    const calculateTotal = () => {
+      const selected = Array.from(checkboxes)
+        .filter(cb => cb.checked)
+        .map(cb => parseFloat(cb.dataset.price) || 0);
+      
+      const selectedServicesTotal = selected.reduce((sum, price) => sum + price, 0);
+      const additionalServiceCost = parseFloat(serviceCostInput.value) || 0;
+      const labourFee = parseFloat(labourFeeInput.value) || 20000;
+      const total = selectedServicesTotal + additionalServiceCost + labourFee;
+      totalServiceCostInput.value = total;
+    };
+    
+    serviceCostInput.addEventListener('input', calculateTotal);
+    labourFeeInput.addEventListener('input', calculateTotal);
+    
+    // Initialize on page load
+    calculateTotal();
+    
+    // Form submission validation
+    document.querySelector('.service-record-form').addEventListener('submit', (e) => {
+      const selected = Array.from(checkboxes).some(cb => cb.checked);
+      if (!selected) {
+        e.preventDefault();
+        alert('Please select at least one service');
+      }
     });

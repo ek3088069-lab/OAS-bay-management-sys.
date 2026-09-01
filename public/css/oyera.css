@@ -5,17 +5,21 @@
     font-family:Arial, Helvetica, sans-serif;
 }
 
+html {
+    background-image: url('/images/oyerabackground.png');
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 body{
     margin:0;
     padding:0;
-    background-color:#f3efe7;
+    background-color:rgba(243, 239, 231, 0.95);
     color:#ffffff;
     line-height:1.6;
-    background-image:url("images/oyerabackground.png");
-    background-position:center;
-    background-size:cover;
-    background-repeat:no-repeat;
-    background-attachment:fixed;
+    background-image: none;
 }
 
 /* Header */
@@ -40,13 +44,14 @@ header p{
 /* Navigation */
 
 nav{
-    background:rgba(29,29,29,.9);
+    background:rgba(60,60,60,.85);
     text-align:center;
     padding:15px;
+    border-bottom: 2px solid #f4b400;
 }
 
 nav a{
-    color:white;
+    color:#f0f0f0;
     text-decoration:none;
     margin:0 20px;
     font-weight:bold;
